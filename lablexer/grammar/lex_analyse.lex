@@ -7,7 +7,7 @@
 %}
 
 
-other  [^><=]
+other  [^><=/n/r]
 
 %%
 {other}+  { 
