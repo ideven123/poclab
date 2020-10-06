@@ -1,0 +1,63 @@
+设计思路： 写一个状态机，然后把状态机化简。边扫描，边输出。
+
+只有三个状态，在三个状态下又有不同的分支。状态0 表示在识别other中，状态1 表示已经识别了一个 < 。状态6 表示已经识别了一个 > . 
+
+具体实现时状态机代码如下：  
+    switch (state)
+        {
+        case 0 :
+            if(ch == '<') {
+                next_state = 1;
+                if(num != 0) printf("(other,%d)",num) ;
+                num = 0;
+            }     
+            else if(ch == '='){
+                next_state = 0;
+                printf("(other,%d)",num) ;
+                printf("(relop,=)");
+                num = 0;
+            }else if(ch == '>')
+            {
+                next_state = 6;
+                 printf("(other,%d)",num) ;
+                 num = 0;
+            }else{
+                num++;
+            }          
+            break;
+        case 1 :
+             if(ch == '=')
+               printf("(relop,<=)");
+             else if (ch == '>')
+             {
+                 printf("(relop,<>)"); 
+             }             
+            else
+               {
+                printf("(relop,<)"); 
+                num = 1;
+               }              
+              next_state = 0 ;
+            break;
+
+        case 6 :
+            if(ch == '=')
+            printf("(relop,>=)");
+            else
+            {
+                printf("(relop,>)"); 
+                num = 1;
+            }
+            next_state = 0;
+            break;                  
+        
+        default:
+            break;
+        }
+
+
+
+
+
+ 优： 内存占用小，效率高：
+ 缺： 没有存储状态，无法回溯，
