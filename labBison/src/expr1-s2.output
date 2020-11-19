@@ -1,0 +1,334 @@
+语法
+
+    0 $accept: input $end
+
+    1 input: %empty
+    2      | input line
+
+    3 line: EOL
+    4     | exp EOL
+
+    5 exp: exp PLUS term
+    6    | exp MINUS term
+    7    | term
+
+    8 term: term MULT next
+    9     | term DIV next
+   10     | next
+
+   11 next: MINUS next
+   12     | eon
+
+   13 eon: fact EXPON eon
+   14    | fact
+
+   15 fact: NUMBER
+   16     | LB exp RB
+
+
+终结语词，附有它们出现处的规则
+
+$end (0) 0
+error (256)
+NUMBER <Un> (258) 15
+PLUS <op> (259) 5
+MINUS <op> (260) 6 11
+MULT <op> (261) 8
+DIV <op> (262) 9
+EXPON <op> (263) 13
+EOL (264) 3 4
+LB (265) 16
+RB (266) 16
+
+
+非终结语词，附有它们出现处的规则
+
+$accept (12)
+    于左侧： 0
+input (13)
+    于左侧： 1 2, 于右侧： 0 2
+line (14)
+    于左侧： 3 4, 于右侧： 2
+exp <Un> (15)
+    于左侧： 5 6 7, 于右侧： 4 5 6 16
+term <Un> (16)
+    于左侧： 8 9 10, 于右侧： 5 6 7 8 9
+next <Un> (17)
+    于左侧： 11 12, 于右侧： 8 9 10 11
+eon <Un> (18)
+    于左侧： 13 14, 于右侧： 12 13
+fact <Un> (19)
+    于左侧： 15 16, 于右侧： 13 14
+
+
+状态 0
+
+    0 $accept: . input $end
+
+    $default  使用规则 1 以归约 (input)
+
+    input  转到状态 1
+
+
+状态 1
+
+    0 $accept: input . $end
+    2 input: input . line
+
+    $end    偏移，并进入状态 2
+    NUMBER  偏移，并进入状态 3
+    MINUS   偏移，并进入状态 4
+    EOL     偏移，并进入状态 5
+    LB      偏移，并进入状态 6
+
+    line  转到状态 7
+    exp   转到状态 8
+    term  转到状态 9
+    next  转到状态 10
+    eon   转到状态 11
+    fact  转到状态 12
+
+
+状态 2
+
+    0 $accept: input $end .
+
+    $default  接受
+
+
+状态 3
+
+   15 fact: NUMBER .
+
+    $default  使用规则 15 以归约 (fact)
+
+
+状态 4
+
+   11 next: MINUS . next
+
+    NUMBER  偏移，并进入状态 3
+    MINUS   偏移，并进入状态 4
+    LB      偏移，并进入状态 6
+
+    next  转到状态 13
+    eon   转到状态 11
+    fact  转到状态 12
+
+
+状态 5
+
+    3 line: EOL .
+
+    $default  使用规则 3 以归约 (line)
+
+
+状态 6
+
+   16 fact: LB . exp RB
+
+    NUMBER  偏移，并进入状态 3
+    MINUS   偏移，并进入状态 4
+    LB      偏移，并进入状态 6
+
+    exp   转到状态 14
+    term  转到状态 9
+    next  转到状态 10
+    eon   转到状态 11
+    fact  转到状态 12
+
+
+状态 7
+
+    2 input: input line .
+
+    $default  使用规则 2 以归约 (input)
+
+
+状态 8
+
+    4 line: exp . EOL
+    5 exp: exp . PLUS term
+    6    | exp . MINUS term
+
+    PLUS   偏移，并进入状态 15
+    MINUS  偏移，并进入状态 16
+    EOL    偏移，并进入状态 17
+
+
+状态 9
+
+    7 exp: term .
+    8 term: term . MULT next
+    9     | term . DIV next
+
+    MULT  偏移，并进入状态 18
+    DIV   偏移，并进入状态 19
+
+    $default  使用规则 7 以归约 (exp)
+
+
+状态 10
+
+   10 term: next .
+
+    $default  使用规则 10 以归约 (term)
+
+
+状态 11
+
+   12 next: eon .
+
+    $default  使用规则 12 以归约 (next)
+
+
+状态 12
+
+   13 eon: fact . EXPON eon
+   14    | fact .
+
+    EXPON  偏移，并进入状态 20
+
+    $default  使用规则 14 以归约 (eon)
+
+
+状态 13
+
+   11 next: MINUS next .
+
+    $default  使用规则 11 以归约 (next)
+
+
+状态 14
+
+    5 exp: exp . PLUS term
+    6    | exp . MINUS term
+   16 fact: LB exp . RB
+
+    PLUS   偏移，并进入状态 15
+    MINUS  偏移，并进入状态 16
+    RB     偏移，并进入状态 21
+
+
+状态 15
+
+    5 exp: exp PLUS . term
+
+    NUMBER  偏移，并进入状态 3
+    MINUS   偏移，并进入状态 4
+    LB      偏移，并进入状态 6
+
+    term  转到状态 22
+    next  转到状态 10
+    eon   转到状态 11
+    fact  转到状态 12
+
+
+状态 16
+
+    6 exp: exp MINUS . term
+
+    NUMBER  偏移，并进入状态 3
+    MINUS   偏移，并进入状态 4
+    LB      偏移，并进入状态 6
+
+    term  转到状态 23
+    next  转到状态 10
+    eon   转到状态 11
+    fact  转到状态 12
+
+
+状态 17
+
+    4 line: exp EOL .
+
+    $default  使用规则 4 以归约 (line)
+
+
+状态 18
+
+    8 term: term MULT . next
+
+    NUMBER  偏移，并进入状态 3
+    MINUS   偏移，并进入状态 4
+    LB      偏移，并进入状态 6
+
+    next  转到状态 24
+    eon   转到状态 11
+    fact  转到状态 12
+
+
+状态 19
+
+    9 term: term DIV . next
+
+    NUMBER  偏移，并进入状态 3
+    MINUS   偏移，并进入状态 4
+    LB      偏移，并进入状态 6
+
+    next  转到状态 25
+    eon   转到状态 11
+    fact  转到状态 12
+
+
+状态 20
+
+   13 eon: fact EXPON . eon
+
+    NUMBER  偏移，并进入状态 3
+    LB      偏移，并进入状态 6
+
+    eon   转到状态 26
+    fact  转到状态 12
+
+
+状态 21
+
+   16 fact: LB exp RB .
+
+    $default  使用规则 16 以归约 (fact)
+
+
+状态 22
+
+    5 exp: exp PLUS term .
+    8 term: term . MULT next
+    9     | term . DIV next
+
+    MULT  偏移，并进入状态 18
+    DIV   偏移，并进入状态 19
+
+    $default  使用规则 5 以归约 (exp)
+
+
+状态 23
+
+    6 exp: exp MINUS term .
+    8 term: term . MULT next
+    9     | term . DIV next
+
+    MULT  偏移，并进入状态 18
+    DIV   偏移，并进入状态 19
+
+    $default  使用规则 6 以归约 (exp)
+
+
+状态 24
+
+    8 term: term MULT next .
+
+    $default  使用规则 8 以归约 (term)
+
+
+状态 25
+
+    9 term: term DIV next .
+
+    $default  使用规则 9 以归约 (term)
+
+
+状态 26
+
+   13 eon: fact EXPON eon .
+
+    $default  使用规则 13 以归约 (eon)
