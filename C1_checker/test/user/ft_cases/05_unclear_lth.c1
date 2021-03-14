@@ -1,0 +1,9 @@
+const int c1 = 3 + 7;
+int main()
+{
+    int v1 = 7 ;
+    int a1[c1];
+    int a2[v1] = {1, 2};
+    int a3[6] = {1, 2, 3, 4}, a4[2] = {1, 2};
+    return 0;
+} 

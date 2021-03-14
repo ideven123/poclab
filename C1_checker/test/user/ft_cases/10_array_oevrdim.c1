@@ -1,0 +1,8 @@
+const int c1 = 3 + 7;
+int main()
+{
+    int v1, v2 = 3;
+    int a1[3][7];
+    
+    a1[1][0][2] = 0;
+} 

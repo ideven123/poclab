@@ -1,0 +1,17 @@
+01, 01_nodefinition of function xxx ,01_undefine_func.c1 
+02, 02_redefine of function xxx  , 02_redefine_func.c1
+03, 03_empty fuction xxx , 03_empty_func.c1
+04, 04_redefinition of var xxx ,04_redefine_var.c1
+05, 05_unkonw length of array xxx ,05_unclear_lth.c1
+06, 06_Unable assign to const xxx , 06_assign_toconst.c1 
+07, 07_not an array xxx, 07_not_array.c1 
+08, 08_wrong type of index xxx , 08_conflict_indextype.c1
+09, 09_array overstep xxx , 09_array_over.c1
+10, 10_oevr dimenson of xxx ,10_array_oevrdim.c1
+11, 11_undefined variable xxx , 11_undefined_var.c1
+12, 12_unmatched return type , 12_ret_fmterr.c1
+13, 13_no definition of main ,13_no_main.c1
+14, 14_unsuported return type of main ,14_main_reterr.c1
+15, 15_inital data too much xxx , 15_initial_not_match.c1
+16, 16_wrong type to const xxx , 16_const_assignerr.c1
+17, 17_illeagle length define of array xxx  ,17_ill_lthdefine.c1
